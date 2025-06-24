@@ -361,8 +361,15 @@ function initializeCarousel() {
     // Acumular scroll para evitar sensibilidad excesiva
     scrollAccumulator += direction
 
-    // Umbral para cambiar slide (ajustable para sensibilidad)
-    const scrollThreshold = 3
+    //identificar si el usuario està en dispotivos moviles (android o apple)
+
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod|/i.test(navigator.userAgent)
+
+    // y ajustar dependiendo el dispositivo donde se encuentre el usuario (si el usuario esta en dispositivos moviles su umbral de scroll serà 2, caso contrario serà 3)
+    const scrollThreshold = isMobile ? 2 : 3
+    
+    // Umbral para cambiar slide (ajustable para sensibilidad). USAR SI SE QUIERE PONER EN GENERAL
+    //const scrollThreshold = 3
 
     if (Math.abs(scrollAccumulator) >= scrollThreshold) {
       if (scrollAccumulator > 0) {
