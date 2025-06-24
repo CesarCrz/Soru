@@ -887,10 +887,10 @@ body {
 }
 
 .status-text {
-  font-family: "Bebas Neue", cursive;
-  font-size: 0.95rem;
+  font-family: "Anton", sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: #ede4e0;
   text-transform: uppercase;
   cursor: help;
@@ -1299,6 +1299,94 @@ img[loading="lazy"] {
 
 .maps-modal.active .maps-modal-content {
   transform: scale(1);
+}
+
+/* ===== SECCIÓN DE VALORACIÓN EN MODAL ===== */
+.rating-section {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(251, 36, 12, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(251, 36, 12, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.rating-section:hover {
+  background: rgba(251, 36, 12, 0.08);
+  border-color: rgba(251, 36, 12, 0.2);
+}
+
+.rating-title {
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.4rem;
+  color: #1d1212;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.rating-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.star:hover {
+  color: #ffd700;
+  transform: scale(1.2);
+}
+
+.star.hovered {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+.star:active {
+  transform: scale(0.95);
+}
+
+.rating-text {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Responsive para sección de valoración */
+@media (max-width: 480px) {
+  .rating-section {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .rating-title {
+    font-size: 1.2rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+  }
+
+  .star-rating {
+    gap: 6px;
+  }
 }
 
 /* ===== ANIMACIONES ===== */

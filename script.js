@@ -177,7 +177,10 @@ function initializeMapsModal() {
     })
   })
 
-  console.log("✅ Modal de mapas inicializado")
+  // Inicializar sistema de valoración con estrellas
+  initializeStarRating()
+
+  console.log("✅ Modal de mapas con valoración inicializado")
 }
 
 // ===== BOTÓN WHATSAPP MEJORADO =====
@@ -537,6 +540,66 @@ function initializeLazyLoading() {
   }
 
   console.log("✅ Lazy loading inicializado")
+}
+
+// ===== SISTEMA DE VALORACIÓN CON ESTRELLAS =====
+function initializeStarRating() {
+  const starRatings = document.querySelectorAll(".star-rating")
+
+  // URLs de valoración para cada sucursal
+  const reviewUrls = {
+    iteso: "https://search.google.com/local/writereview?placeid=ChIJuyCj3uSsKIQRh4qbtLpZxgI",
+    tesoro: "https://search.google.com/local/writereview?placeid=ChIJLygLDN2tKIQRlegYv8dOXLo",
+  }
+
+  starRatings.forEach((rating) => {
+    const stars = rating.querySelectorAll(".star")
+    const location = rating.dataset.location
+
+    // Efecto hover para mostrar estrellas
+    stars.forEach((star, index) => {
+      star.addEventListener("mouseenter", () => {
+        highlightStars(stars, index + 1)
+      })
+
+      star.addEventListener("click", () => {
+        // Efecto visual de clic
+        star.style.transform = "scale(0.8)"
+        setTimeout(() => {
+          star.style.transform = "scale(1.2)"
+        }, 100)
+
+        // Abrir enlace de Google Reviews
+        setTimeout(() => {
+          window.open(reviewUrls[location], "_blank", "noopener,noreferrer")
+          trackUserInteraction("rating-click", `${location}-${index + 1}-stars`)
+        }, 200)
+      })
+    })
+
+    // Resetear estrellas cuando el mouse sale del contenedor
+    rating.addEventListener("mouseleave", () => {
+      resetStars(stars)
+    })
+  })
+
+  function highlightStars(stars, count) {
+    stars.forEach((star, index) => {
+      if (index < count) {
+        star.classList.add("hovered")
+      } else {
+        star.classList.remove("hovered")
+      }
+    })
+  }
+
+  function resetStars(stars) {
+    stars.forEach((star) => {
+      star.classList.remove("hovered")
+    })
+  }
+
+  console.log("✅ Sistema de valoración con estrellas inicializado")
 }
 
 // ===== UTILIDADES DE RENDIMIENTO =====
