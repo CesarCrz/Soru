@@ -1244,6 +1244,7 @@ body {
 
   .status-text {
     font-size: 0.9rem;
+    font-weight: 500;
   }
 }
 
@@ -1439,6 +1440,7 @@ body {
 
   .status-text {
     font-size: 0.75rem;
+    font-weight: 500;
   }
 
   .info-item {
