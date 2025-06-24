@@ -368,7 +368,7 @@ body {
   width: 100%;
   height: 350px; /* Altura fija para el mapa */
   border-radius: 10px;
-  margin-bottom: 20px; /* Espacio entre mapa y valoración */
+  margin-bottom: 15px; /* Reducido de 20px a 15px */
 }
 
 /* ===== SCROLL BAR PERSONALIZADO PARA MODAL ===== */
@@ -956,6 +956,87 @@ body {
   }
 }
 
+/* ===== SECCIÓN DE VALORACIÓN EN MODAL - OPTIMIZADA Y COMPACTA ===== */
+.rating-section {
+  margin-top: 58px; /* Reducido de 20px */
+  padding: 15px; /* Reducido de 20px */
+  /*background: rgba(251, 36, 12, 0.05);
+  border-radius: 10px; /* Reducido de 12px */
+  /*border: 1px solid rgba(251, 36, 12, 0.1);*/
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.rating-section:hover {
+  background: rgba(251, 36, 12, 0.08);
+  border-color: rgba(251, 36, 12, 0.2);
+}
+
+.rating-title {
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.2rem; /* Reducido de 1.4rem */
+  color: #1d1212;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+}
+
+.rating-subtitle {
+  font-size: 0.8rem; /* Reducido de 0.9rem */
+  color: #666;
+  margin-bottom: 0.8rem; /* Reducido de 1rem */
+  font-style: italic;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 6px; /* Reducido de 8px */
+  margin-bottom: 0.8rem; /* Reducido de 1rem */
+  cursor: pointer;
+  /* Mejorado para touch devices */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.star {
+  font-size: 1.8rem; /* Reducido de 2rem */
+  color: grey;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  /* Optimizado para dispositivos táctiles */
+  padding: 4px; /* Área de toque más grande */
+  margin: -4px; /* Compensar el padding */
+  border-radius: 50%;
+}
+
+.star:hover,
+.star:focus {
+  color: #ffd700;
+  transform: scale(1.15); /* Reducido de 1.2 */
+}
+
+.star.hovered {
+  color: #ffd700;
+  transform: scale(1.1);
+}
+
+.star:active {
+  transform: scale(0.95);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.rating-text {
+  font-size: 0.75rem; /* Reducido de 0.85rem */
+  color: #888;
+  margin: 0;
+  position: absolute;
+  bottom: 5%;
+  line-height: 1.3;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Tablets */
@@ -1082,7 +1163,8 @@ body {
   }
 
   .maps-container {
-    height: 350px;
+    min-height: 400px;
+    max-height: 65vh;
   }
 
   /* Responsive para indicadores de estado */
@@ -1101,6 +1183,26 @@ body {
 
   .status-text {
     font-size: 0.7rem;
+  }
+
+  /* Rating section en tablets */
+  .rating-section {
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .rating-title {
+    font-size: 1.1rem;
+  }
+
+  .star {
+    font-size: 1.6rem;
+    padding: 6px;
+    margin: -6px;
+  }
+
+  .star-rating {
+    gap: 8px;
   }
 }
 
@@ -1181,13 +1283,14 @@ body {
 
   .maps-container {
     padding: 15px;
-    min-height: 400px;
+    min-height: 350px;
     max-height: 75vh;
   }
 
   .map-content iframe,
   .map-content div {
-    height: 250px; /* Altura reducida en móviles */
+    height: 220px; /* Altura reducida en móviles */
+    margin-bottom: 10px;
   }
 
   .maps-modal-header {
@@ -1196,11 +1299,6 @@ body {
 
   .maps-modal-header h3 {
     font-size: 1.4rem;
-  }
-
-  .maps-container {
-    padding: 15px;
-    height: 300px;
   }
 
   .maps-tab {
@@ -1246,6 +1344,39 @@ body {
   .info-item {
     font-size: 0.75rem !important;
   }
+
+  /* Rating section optimizada para móviles */
+  .rating-section {
+    padding: 10px; /* Más compacto */
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+
+  .rating-title {
+    font-size: 1rem; /* Más pequeño en móviles */
+    margin-bottom: 0.2rem;
+  }
+
+  .rating-subtitle {
+    font-size: 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .star {
+    font-size: 1.4rem; /* Tamaño optimizado para móviles */
+    padding: 8px; /* Área de toque más grande */
+    margin: -8px;
+  }
+
+  .star-rating {
+    gap: 4px; /* Menos espacio entre estrellas */
+    margin-bottom: 0.6rem;
+  }
+
+  .rating-text {
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
 }
 
 /* Pantallas muy pequeñas */
@@ -1268,7 +1399,27 @@ body {
   }
 
   .maps-container {
-    height: 250px;
+    min-height: 300px;
+  }
+
+  .map-content iframe,
+  .map-content div {
+    height: 180px;
+  }
+
+  /* Rating section para pantallas muy pequeñas */
+  .rating-section {
+    padding: 8px;
+  }
+
+  .star {
+    font-size: 1.2rem;
+    padding: 6px;
+    margin: -6px;
+  }
+
+  .star-rating {
+    gap: 2px;
   }
 }
 
@@ -1304,6 +1455,13 @@ button:focus {
 .floating-btn:focus {
   outline: 3px solid #ede4e0;
   outline-offset: 3px;
+}
+
+/* Focus para estrellas */
+.star:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+  border-radius: 50%;
 }
 
 /* ===== OPTIMIZACIONES DE RENDIMIENTO ===== */
@@ -1345,94 +1503,6 @@ img[loading="lazy"] {
 
 .maps-modal.active .maps-modal-content {
   transform: scale(1);
-}
-
-/* ===== SECCIÓN DE VALORACIÓN EN MODAL ===== */
-.rating-section {
-  margin-top: 20px;
-  padding: 20px;
-  background: rgba(251, 36, 12, 0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(251, 36, 12, 0.1);
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.rating-section:hover {
-  background: rgba(251, 36, 12, 0.08);
-  border-color: rgba(251, 36, 12, 0.2);
-}
-
-.rating-title {
-  font-family: "Bebas Neue", cursive;
-  font-size: 1.4rem;
-  color: #1d1212;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-}
-
-.rating-subtitle {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 1rem;
-  font-style: italic;
-}
-
-.star-rating {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-
-.star {
-  font-size: 2rem;
-  color: #ddd;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-}
-
-.star:hover {
-  color: #ffd700;
-  transform: scale(1.2);
-}
-
-.star.hovered {
-  color: #ffd700;
-  transform: scale(1.1);
-}
-
-.star:active {
-  transform: scale(0.95);
-}
-
-.rating-text {
-  font-size: 0.85rem;
-  color: #888;
-  margin: 0;
-}
-
-/* Responsive para sección de valoración */
-@media (max-width: 480px) {
-  .rating-section {
-    padding: 15px;
-    margin-top: 15px;
-  }
-
-  .rating-title {
-    font-size: 1.2rem;
-  }
-
-  .star {
-    font-size: 1.5rem;
-  }
-
-  .star-rating {
-    gap: 6px;
-  }
 }
 
 /* ===== ANIMACIONES ===== */

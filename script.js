@@ -542,7 +542,7 @@ function initializeLazyLoading() {
   console.log("✅ Lazy loading inicializado")
 }
 
-// ===== SISTEMA DE VALORACIÓN CON ESTRELLAS =====
+// ===== SISTEMA DE VALORACIÓN CON ESTRELLAS - OPTIMIZADO PARA MÓVILES =====
 function initializeStarRating() {
   const starRatings = document.querySelectorAll(".star-rating")
 
@@ -556,32 +556,101 @@ function initializeStarRating() {
     const stars = rating.querySelectorAll(".star")
     const location = rating.dataset.location
 
-    // Efecto hover para mostrar estrellas
+    // Detectar si es dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+    // Efecto hover para dispositivos de escritorio
+    if (!isMobile) {
+      stars.forEach((star, index) => {
+        star.addEventListener("mouseenter", () => {
+          highlightStars(stars, index + 1)
+        })
+      })
+
+      // Resetear estrellas cuando el mouse sale del contenedor
+      rating.addEventListener("mouseleave", () => {
+        resetStars(stars)
+      })
+    }
+
+    // Event listeners para todos los dispositivos (click/touch)
     stars.forEach((star, index) => {
-      star.addEventListener("mouseenter", () => {
+      // Hacer las estrellas focusables para accesibilidad
+      star.setAttribute("tabindex", "0")
+      star.setAttribute("role", "button")
+      star.setAttribute("aria-label", `Calificar con ${index + 1} estrella${index > 0 ? "s" : ""}`)
+
+      // Click/Touch handler
+      star.addEventListener("click", (e) => {
+        e.preventDefault()
+        handleStarClick(star, stars, location, index)
+      })
+
+      // Touch events para móviles
+      if (isMobile) {
+        star.addEventListener(
+          "touchstart",
+          (e) => {
+            e.preventDefault()
+            highlightStars(stars, index + 1)
+          },
+          { passive: false },
+        )
+
+        star.addEventListener(
+          "touchend",
+          (e) => {
+            e.preventDefault()
+            handleStarClick(star, stars, location, index)
+          },
+          { passive: false },
+        )
+      }
+
+      // Keyboard navigation
+      star.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          handleStarClick(star, stars, location, index)
+        }
+      })
+
+      // Focus events para accesibilidad
+      star.addEventListener("focus", () => {
         highlightStars(stars, index + 1)
       })
 
-      star.addEventListener("click", () => {
-        // Efecto visual de clic
-        star.style.transform = "scale(0.8)"
-        setTimeout(() => {
-          star.style.transform = "scale(1.2)"
-        }, 100)
-
-        // Abrir enlace de Google Reviews
-        setTimeout(() => {
-          window.open(reviewUrls[location], "_blank", "noopener,noreferrer")
-          trackUserInteraction("rating-click", `${location}-${index + 1}-stars`)
-        }, 200)
+      star.addEventListener("blur", () => {
+        if (!isMobile) {
+          resetStars(stars)
+        }
       })
     })
-
-    // Resetear estrellas cuando el mouse sale del contenedor
-    rating.addEventListener("mouseleave", () => {
-      resetStars(stars)
-    })
   })
+
+  function handleStarClick(star, stars, location, index) {
+    // Efecto visual de clic
+    star.style.transform = "scale(0.8)"
+    setTimeout(() => {
+      star.style.transform = "scale(1.15)"
+    }, 100)
+
+    // Feedback háptico en dispositivos compatibles
+    if (navigator.vibrate) {
+      navigator.vibrate(50)
+    }
+
+    // Abrir enlace de Google Reviews
+    setTimeout(() => {
+      window.open(reviewUrls[location], "_blank", "noopener,noreferrer")
+      trackUserInteraction("rating-click", `${location}-${index + 1}-stars`)
+    }, 200)
+
+    // Resetear transformación después de la animación
+    setTimeout(() => {
+      star.style.transform = ""
+    }, 400)
+  }
 
   function highlightStars(stars, count) {
     stars.forEach((star, index) => {
@@ -599,7 +668,7 @@ function initializeStarRating() {
     })
   }
 
-  console.log("✅ Sistema de valoración con estrellas inicializado")
+  console.log("✅ Sistema de valoración con estrellas optimizado para todos los dispositivos inicializado")
 }
 
 // ===== UTILIDADES DE RENDIMIENTO =====
