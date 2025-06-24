@@ -49,7 +49,7 @@ body {
 /* ===== HEADER FIJO ===== */
 .header {
   position: fixed;
-  top: 0;
+  top: 0;   
   left: 0;
   width: 100%;
   background: rgba(29, 18, 18, 0.95);
@@ -356,7 +356,7 @@ body {
 .map-content {
   display: none;
   min-height: 100%;
-  padding-bottom: 20px; /* Espacio adicional al final */
+  padding-bottom: 30px; /* CORREGIDO: Aumentado de 20px para más espacio */
 }
 
 .map-content.active {
@@ -368,7 +368,7 @@ body {
   width: 100%;
   height: 350px; /* Altura fija para el mapa */
   border-radius: 10px;
-  margin-bottom: 15px; /* Reducido de 20px a 15px */
+  margin-bottom: 20px; /* CORREGIDO: Aumentado de 15px para mejor separación */
 }
 
 /* ===== SCROLL BAR PERSONALIZADO PARA MODAL ===== */
@@ -956,16 +956,14 @@ body {
   }
 }
 
-/* ===== SECCIÓN DE VALORACIÓN EN MODAL - OPTIMIZADA Y COMPACTA ===== */
+/* ===== SECCIÓN DE VALORACIÓN EN MODAL - CORREGIDA PARA MÓVILES ===== */
 .rating-section {
-  margin-top: 58px; /* Reducido de 20px */
-  padding: 15px; /* Reducido de 20px */
-  /*background: rgba(251, 36, 12, 0.05);
-  border-radius: 10px; /* Reducido de 12px */
-  /*border: 1px solid rgba(251, 36, 12, 0.1);*/
+  margin-top: 55px; /* CORREGIDO: Aumentado de 15px para mejor separación */
+  padding: 15px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
+  clear: both; /* CORREGIDO: Asegurar que no se encime */
 }
 
 .rating-section:hover {
@@ -975,47 +973,45 @@ body {
 
 .rating-title {
   font-family: "Bebas Neue", cursive;
-  font-size: 1.2rem; /* Reducido de 1.4rem */
+  font-size: 1.5rem;
   color: #1d1212;
   letter-spacing: 1px;
-  margin-bottom: 0.3rem; /* Reducido de 0.5rem */
+  margin-bottom: 0.3rem;
 }
 
 .rating-subtitle {
-  font-size: 0.8rem; /* Reducido de 0.9rem */
+  font-size: 0.8rem;
   color: #666;
-  margin-bottom: 0.8rem; /* Reducido de 1rem */
+  margin-bottom: 0.8rem;
   font-style: italic;
 }
 
 .star-rating {
   display: flex;
   justify-content: center;
-  gap: 6px; /* Reducido de 8px */
-  margin-bottom: 0.8rem; /* Reducido de 1rem */
+  gap: 6px;
+  margin-bottom: 0.8rem;
   cursor: pointer;
-  /* Mejorado para touch devices */
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
 .star {
-  font-size: 1.8rem; /* Reducido de 2rem */
+  font-size: 1.8rem;
   color: grey;
   transition: all 0.3s ease;
   cursor: pointer;
   user-select: none;
   position: relative;
-  /* Optimizado para dispositivos táctiles */
-  padding: 4px; /* Área de toque más grande */
-  margin: -4px; /* Compensar el padding */
+  padding: 4px;
+  margin: -4px;
   border-radius: 50%;
 }
 
 .star:hover,
 .star:focus {
   color: #ffd700;
-  transform: scale(1.15); /* Reducido de 1.2 */
+  transform: scale(1.15);
 }
 
 .star.hovered {
@@ -1029,12 +1025,23 @@ body {
 }
 
 .rating-text {
-  font-size: 0.75rem; /* Reducido de 0.85rem */
+  font-size: 0.75rem;
   color: #888;
   margin: 0;
-  position: absolute;
-  bottom: 5%;
   line-height: 1.3;
+}
+
+/* ===== SEPARADOR VISUAL PARA RATING ===== */
+.rating-section::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fb240c, transparent);
+  border-radius: 1px;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -1167,6 +1174,12 @@ body {
     max-height: 65vh;
   }
 
+  /* CORREGIDO: Mapas en tablets */
+  .map-content iframe,
+  .map-content div {
+    margin-bottom: 25px; /* Más separación en tablets */
+  }
+
   /* Responsive para indicadores de estado */
   .branch-header {
     flex-wrap: wrap;
@@ -1185,10 +1198,10 @@ body {
     font-size: 0.7rem;
   }
 
-  /* Rating section en tablets */
+  /* CORREGIDO: Rating section en tablets */
   .rating-section {
     padding: 12px;
-    margin-top: 12px;
+    margin-top: 35px; /* CORREGIDO: Aumentado de 30px */
   }
 
   .rating-title {
@@ -1203,6 +1216,11 @@ body {
 
   .star-rating {
     gap: 8px;
+  }
+
+  .rating-section::before {
+    top: -12px;
+    width: 70px;
   }
 }
 
@@ -1283,14 +1301,15 @@ body {
 
   .maps-container {
     padding: 15px;
-    min-height: 350px;
-    max-height: 75vh;
+    min-height: 400px; /* CORREGIDO: Aumentado de 350px */
+    max-height: 80vh; /* CORREGIDO: Aumentado de 75vh */
   }
 
+  /* CORREGIDO: Mapas en móviles */
   .map-content iframe,
   .map-content div {
-    height: 220px; /* Altura reducida en móviles */
-    margin-bottom: 10px;
+    height: 250px; /* CORREGIDO: Aumentado de 220px */
+    margin-bottom: 20px; /* CORREGIDO: Aumentado de 10px */
   }
 
   .maps-modal-header {
@@ -1345,37 +1364,48 @@ body {
     font-size: 0.75rem !important;
   }
 
-  /* Rating section optimizada para móviles */
+  /* CORREGIDO: Rating section optimizada para móviles */
   .rating-section {
-    padding: 10px; /* Más compacto */
-    margin-top: 10px;
+    padding: 18px; /* CORREGIDO: Aumentado de 10px */
+    margin-top: 40px; /* CORREGIDO: Aumentado de 20px */
     border-radius: 8px;
   }
 
   .rating-title {
-    font-size: 1rem; /* Más pequeño en móviles */
-    margin-bottom: 0.2rem;
+    font-size: 1rem;
+    margin-bottom: 0.3rem; /* CORREGIDO: Aumentado de 0.2rem */
   }
 
   .rating-subtitle {
-    font-size: 0.7rem;
-    margin-bottom: 0.6rem;
+    font-size: 0.75rem; /* CORREGIDO: Aumentado de 0.7rem */
+    margin-bottom: 0.8rem; /* CORREGIDO: Aumentado de 0.6rem */
   }
 
   .star {
-    font-size: 1.4rem; /* Tamaño optimizado para móviles */
-    padding: 8px; /* Área de toque más grande */
-    margin: -8px;
+    font-size: 1.5rem; /* CORREGIDO: Aumentado de 1.4rem */
+    padding: 10px; /* CORREGIDO: Aumentado de 8px para mejor área de toque */
+    margin: -10px; /* CORREGIDO: Ajustado proporcionalmente */
   }
 
   .star-rating {
-    gap: 4px; /* Menos espacio entre estrellas */
-    margin-bottom: 0.6rem;
+    gap: 6px; /* CORREGIDO: Aumentado de 4px */
+    margin-bottom: 0.8rem; /* CORREGIDO: Aumentado de 0.6rem */
   }
 
   .rating-text {
-    font-size: 0.7rem;
-    line-height: 1.2;
+    font-size: 0.75rem; /* CORREGIDO: Aumentado de 0.7rem */
+    line-height: 1.3; /* CORREGIDO: Aumentado de 1.2 */
+  }
+
+  .rating-section::before {
+    top: -15px; /* CORREGIDO: Más separación visual en móviles */
+    width: 80px;
+    height: 3px;
+  }
+
+  /* CORREGIDO: Asegurar separación adecuada en el contenedor */
+  .map-content {
+    padding-bottom: 40px; /* CORREGIDO: Más espacio en móviles */
   }
 }
 
@@ -1399,27 +1429,36 @@ body {
   }
 
   .maps-container {
-    min-height: 300px;
+    min-height: 350px; /* CORREGIDO: Aumentado de 300px */
   }
 
+  /* CORREGIDO: Mapas en pantallas muy pequeñas */
   .map-content iframe,
   .map-content div {
-    height: 180px;
+    height: 200px; /* CORREGIDO: Aumentado de 180px */
+    margin-bottom: 15px; /* CORREGIDO: Más separación */
   }
 
-  /* Rating section para pantallas muy pequeñas */
+  /* CORREGIDO: Rating section para pantallas muy pequeñas */
   .rating-section {
-    padding: 8px;
+    padding: 10px;
+    margin-top: 25px; /* CORREGIDO: Aumentado de 10px */
   }
 
   .star {
-    font-size: 1.2rem;
-    padding: 6px;
-    margin: -6px;
+    font-size: 1.3rem; /* CORREGIDO: Aumentado de 1.2rem */
+    padding: 8px; /* CORREGIDO: Aumentado de 6px */
+    margin: -8px; /* CORREGIDO: Ajustado proporcionalmente */
   }
 
   .star-rating {
-    gap: 2px;
+    gap: 4px; /* CORREGIDO: Aumentado de 2px */
+  }
+
+  .rating-section::before {
+    top: -12px;
+    width: 60px;
+    height: 2px;
   }
 }
 
