@@ -49,7 +49,7 @@ body {
 /* ===== HEADER FIJO ===== */
 .header {
   position: fixed;
-  top: 0;   
+  top: 0;
   left: 0;
   width: 100%;
   background: rgba(29, 18, 18, 0.95);
@@ -270,7 +270,7 @@ body {
   border-radius: 15px;
   max-width: 900px;
   width: 90%;
-  max-height: 90vh; /* Aumentado de 80vh a 90vh */
+  max-height: 90vh;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.4s ease;
@@ -345,30 +345,32 @@ body {
 
 .maps-container {
   padding: 20px;
-  height: auto; /* Cambiado de altura fija */
-  min-height: 500px; /* Altura mínima */
-  max-height: 70vh; /* Altura máxima */
-  overflow-y: auto; /* Agregar scroll vertical */
+  height: auto;
+  min-height: 500px;
+  max-height: 70vh;
+  overflow-y: auto;
   overflow-x: hidden;
-  flex: 1; /* Para que ocupe el espacio disponible */
+  flex: 1;
 }
 
+/* ===== CONTENIDO DEL MAPA - DESKTOP (FUNCIONA BIEN) ===== */
 .map-content {
   display: none;
   min-height: 100%;
-  padding-bottom: 30px; /* CORREGIDO: Aumentado de 20px para más espacio */
+  padding-bottom: 30px;
 }
 
 .map-content.active {
   display: block;
 }
 
+/* ===== CONTENEDOR DEL MAPA Y IFRAME - DESKTOP ===== */
 .map-content iframe,
-.map-content div {
+.map-content > div:first-child {
   width: 100%;
-  height: 350px; /* Altura fija para el mapa */
+  height: 350px;
   border-radius: 10px;
-  margin-bottom: 20px; /* CORREGIDO: Aumentado de 15px para mejor separación */
+  margin-bottom: 20px;
 }
 
 /* ===== SCROLL BAR PERSONALIZADO PARA MODAL ===== */
@@ -956,14 +958,14 @@ body {
   }
 }
 
-/* ===== SECCIÓN DE VALORACIÓN EN MODAL - CORREGIDA PARA MÓVILES ===== */
+/* ===== SECCIÓN DE VALORACIÓN - DESKTOP (MANTENER COMO ESTÁ) ===== */
 .rating-section {
-  margin-top: 55px; /* CORREGIDO: Aumentado de 15px para mejor separación */
+  margin-top: 55px;
   padding: 15px;
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
-  clear: both; /* CORREGIDO: Asegurar que no se encime */
+  clear: both;
 }
 
 .rating-section:hover {
@@ -1044,7 +1046,7 @@ body {
   border-radius: 1px;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== RESPONSIVE DESIGN - CORRECCIONES ESPECÍFICAS ===== */
 
 /* Tablets */
 @media (max-width: 768px) {
@@ -1148,7 +1150,7 @@ body {
   }
 
   .whatsapp-container {
-    margin-left: 0; /* Centrar en móviles */
+    margin-left: 0;
   }
 
   /* Botones flotantes en tablets */
@@ -1163,21 +1165,67 @@ body {
     height: 45px;
   }
 
-  /* Modal de mapas en tablets */
+  /* ===== CORRECCIÓN ESPECÍFICA PARA TABLETS - MODAL DE MAPAS ===== */
   .maps-modal-content {
     width: 95%;
     max-height: 85vh;
   }
 
   .maps-container {
-    min-height: 400px;
+    min-height: 450px;
     max-height: 65vh;
+    padding: 15px;
   }
 
-  /* CORREGIDO: Mapas en tablets */
+  /* CLAVE: Separar mapa y valoración en tablets */
+  .map-content {
+    display: none;
+    padding-bottom: 20px;
+  }
+
+  .map-content.active {
+    display: block;
+  }
+
+  /* Contenedor específico del mapa en tablets */
   .map-content iframe,
-  .map-content div {
-    margin-bottom: 25px; /* Más separación en tablets */
+  .map-content > div:first-child {
+    height: 280px;
+    margin-bottom: 30px; /* Más separación en tablets */
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Rating section específica para tablets */
+  .rating-section {
+    padding: 16px;
+    margin-top: 0; /* Remover margin-top que causa problemas */
+    background: rgba(251, 36, 12, 0.05);
+    border: 1px solid rgba(251, 36, 12, 0.1);
+    border-radius: 10px;
+    position: relative;
+    z-index: 2;
+    clear: both;
+  }
+
+  .rating-title {
+    font-size: 1.2rem;
+  }
+
+  .star {
+    font-size: 1.6rem;
+    padding: 8px;
+    margin: -8px;
+  }
+
+  .star-rating {
+    gap: 8px;
+  }
+
+  .rating-section::before {
+    top: -12px;
+    width: 70px;
   }
 
   /* Responsive para indicadores de estado */
@@ -1197,34 +1245,9 @@ body {
   .status-text {
     font-size: 0.7rem;
   }
-
-  /* CORREGIDO: Rating section en tablets */
-  .rating-section {
-    padding: 12px;
-    margin-top: 35px; /* CORREGIDO: Aumentado de 30px */
-  }
-
-  .rating-title {
-    font-size: 1.1rem;
-  }
-
-  .star {
-    font-size: 1.6rem;
-    padding: 6px;
-    margin: -6px;
-  }
-
-  .star-rating {
-    gap: 8px;
-  }
-
-  .rating-section::before {
-    top: -12px;
-    width: 70px;
-  }
 }
 
-/* Móviles */
+/* ===== MÓVILES - CORRECCIÓN PRINCIPAL ===== */
 @media (max-width: 480px) {
   .container {
     padding: 0 15px;
@@ -1293,23 +1316,81 @@ body {
     height: 40px;
   }
 
-  /* Modal de mapas en móviles */
+  /* ===== CORRECCIÓN CRÍTICA PARA MÓVILES - MODAL DE MAPAS ===== */
   .maps-modal-content {
     width: 95%;
-    max-height: 95vh; /* Más altura en móviles */
+    max-height: 95vh;
   }
 
   .maps-container {
-    padding: 15px;
-    min-height: 400px; /* CORREGIDO: Aumentado de 350px */
-    max-height: 80vh; /* CORREGIDO: Aumentado de 75vh */
+    padding: 12px;
+    min-height: 500px; /* Más altura para acomodar contenido */
+    max-height: 85vh;
   }
 
-  /* CORREGIDO: Mapas en móviles */
-  .map-content iframe,
-  .map-content div {
-    height: 250px; /* CORREGIDO: Aumentado de 220px */
-    margin-bottom: 20px; /* CORREGIDO: Aumentado de 10px */
+  /* SOLUCIÓN DEFINITIVA: Estructura del contenido del mapa en móviles */
+  .map-content {
+    display: none;
+    padding-bottom: 15px;
+    /* CLAVE: Usar flexbox solo en móviles para control total */
+    flex-direction: column;
+  }
+
+  .map-content.active {
+    display: flex; /* Cambiar a flex en móviles */
+  }
+
+  /* Contenedor del mapa específico para móviles */
+  .map-content > div:first-child,
+  .map-content iframe {
+    height: 250px !important; /* Altura fija del mapa */
+    margin-bottom: 0 !important; /* Sin margin, usar gap de flex */
+    flex-shrink: 0; /* No permitir encogimiento */
+    order: 1; /* Mapa primero */
+  }
+
+  /* Rating section específica para móviles */
+  .rating-section {
+    padding: 20px;
+    margin-top: 0 !important; /* Sin margin-top */
+    background: rgba(251, 36, 12, 0.06);
+    border: 2px solid rgba(251, 36, 12, 0.15);
+    border-radius: 12px;
+    order: 2; /* Valoración después */
+    flex-shrink: 0; /* No permitir encogimiento */
+    margin: 20px 0 0 0; /* Solo margin-top para separación */
+  }
+
+  .rating-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .rating-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+    padding: 12px; /* Área de toque más grande */
+    margin: -12px;
+  }
+
+  .star-rating {
+    gap: 8px;
+    margin-bottom: 0.8rem;
+  }
+
+  .rating-text {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .rating-section::before {
+    top: -15px;
+    width: 80px;
+    height: 3px;
   }
 
   .maps-modal-header {
@@ -1363,53 +1444,9 @@ body {
   .info-item {
     font-size: 0.75rem !important;
   }
-
-  /* CORREGIDO: Rating section optimizada para móviles */
-  .rating-section {
-    padding: 18px; /* CORREGIDO: Aumentado de 10px */
-    margin-top: 40px; /* CORREGIDO: Aumentado de 20px */
-    border-radius: 8px;
-  }
-
-  .rating-title {
-    font-size: 1rem;
-    margin-bottom: 0.3rem; /* CORREGIDO: Aumentado de 0.2rem */
-  }
-
-  .rating-subtitle {
-    font-size: 0.75rem; /* CORREGIDO: Aumentado de 0.7rem */
-    margin-bottom: 0.8rem; /* CORREGIDO: Aumentado de 0.6rem */
-  }
-
-  .star {
-    font-size: 1.5rem; /* CORREGIDO: Aumentado de 1.4rem */
-    padding: 10px; /* CORREGIDO: Aumentado de 8px para mejor área de toque */
-    margin: -10px; /* CORREGIDO: Ajustado proporcionalmente */
-  }
-
-  .star-rating {
-    gap: 6px; /* CORREGIDO: Aumentado de 4px */
-    margin-bottom: 0.8rem; /* CORREGIDO: Aumentado de 0.6rem */
-  }
-
-  .rating-text {
-    font-size: 0.75rem; /* CORREGIDO: Aumentado de 0.7rem */
-    line-height: 1.3; /* CORREGIDO: Aumentado de 1.2 */
-  }
-
-  .rating-section::before {
-    top: -15px; /* CORREGIDO: Más separación visual en móviles */
-    width: 80px;
-    height: 3px;
-  }
-
-  /* CORREGIDO: Asegurar separación adecuada en el contenedor */
-  .map-content {
-    padding-bottom: 40px; /* CORREGIDO: Más espacio en móviles */
-  }
 }
 
-/* Pantallas muy pequeñas */
+/* ===== PANTALLAS MUY PEQUEÑAS ===== */
 @media (max-width: 320px) {
   .hero-title {
     font-size: 2rem;
@@ -1429,30 +1466,30 @@ body {
   }
 
   .maps-container {
-    min-height: 350px; /* CORREGIDO: Aumentado de 300px */
-  }
-
-  /* CORREGIDO: Mapas en pantallas muy pequeñas */
-  .map-content iframe,
-  .map-content div {
-    height: 200px; /* CORREGIDO: Aumentado de 180px */
-    margin-bottom: 15px; /* CORREGIDO: Más separación */
-  }
-
-  /* CORREGIDO: Rating section para pantallas muy pequeñas */
-  .rating-section {
+    min-height: 450px;
     padding: 10px;
-    margin-top: 25px; /* CORREGIDO: Aumentado de 10px */
+  }
+
+  /* Mapas en pantallas muy pequeñas */
+  .map-content > div:first-child,
+  .map-content iframe {
+    height: 220px !important;
+  }
+
+  /* Rating section para pantallas muy pequeñas */
+  .rating-section {
+    padding: 16px;
+    margin: 15px 0 0 0;
   }
 
   .star {
-    font-size: 1.3rem; /* CORREGIDO: Aumentado de 1.2rem */
-    padding: 8px; /* CORREGIDO: Aumentado de 6px */
-    margin: -8px; /* CORREGIDO: Ajustado proporcionalmente */
+    font-size: 1.3rem;
+    padding: 10px;
+    margin: -10px;
   }
 
   .star-rating {
-    gap: 4px; /* CORREGIDO: Aumentado de 2px */
+    gap: 6px;
   }
 
   .rating-section::before {
@@ -1474,7 +1511,6 @@ body {
     animation: none;
   }
 
-  /* Desactivar animaciones de botones flotantes si se prefiere movimiento reducido */
   .floating-btn {
     animation: none;
   }
