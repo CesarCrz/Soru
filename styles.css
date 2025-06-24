@@ -270,10 +270,12 @@ body {
   border-radius: 15px;
   max-width: 900px;
   width: 90%;
-  max-height: 80vh;
+  max-height: 90vh; /* Aumentado de 80vh a 90vh */
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.4s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .maps-modal-header {
@@ -343,13 +345,18 @@ body {
 
 .maps-container {
   padding: 20px;
-  height: 450px;
-  overflow: hidden;
+  height: auto; /* Cambiado de altura fija */
+  min-height: 500px; /* Altura mínima */
+  max-height: 70vh; /* Altura máxima */
+  overflow-y: auto; /* Agregar scroll vertical */
+  overflow-x: hidden;
+  flex: 1; /* Para que ocupe el espacio disponible */
 }
 
 .map-content {
   display: none;
-  height: 100%;
+  min-height: 100%;
+  padding-bottom: 20px; /* Espacio adicional al final */
 }
 
 .map-content.active {
@@ -359,8 +366,36 @@ body {
 .map-content iframe,
 .map-content div {
   width: 100%;
-  height: 100%;
+  height: 350px; /* Altura fija para el mapa */
   border-radius: 10px;
+  margin-bottom: 20px; /* Espacio entre mapa y valoración */
+}
+
+/* ===== SCROLL BAR PERSONALIZADO PARA MODAL ===== */
+.maps-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.maps-container::-webkit-scrollbar-track {
+  background: rgba(237, 228, 224, 0.1);
+  border-radius: 10px;
+}
+
+.maps-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #fb240c, #ca2f23);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.maps-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ca2f23, #fb240c);
+  transform: scale(1.1);
+}
+
+/* Para Firefox */
+.maps-container {
+  scrollbar-width: thin;
+  scrollbar-color: #fb240c rgba(237, 228, 224, 0.1);
 }
 
 /* ===== SECCIÓN HERO ===== */
@@ -1140,8 +1175,19 @@ body {
 
   /* Modal de mapas en móviles */
   .maps-modal-content {
-    width: 98%;
-    max-height: 90vh;
+    width: 95%;
+    max-height: 95vh; /* Más altura en móviles */
+  }
+
+  .maps-container {
+    padding: 15px;
+    min-height: 400px;
+    max-height: 75vh;
+  }
+
+  .map-content iframe,
+  .map-content div {
+    height: 250px; /* Altura reducida en móviles */
   }
 
   .maps-modal-header {
