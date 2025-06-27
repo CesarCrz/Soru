@@ -418,7 +418,7 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(rgba(29, 18, 18, 0.6), rgba(29, 18, 18, 0.4)),
-    url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/db/a9/76/te-quedaras-con-ganas.jpg") center / cover
+    url("https://res.cloudinary.com/dwoau0ajc/image/upload/v1751042967/upscalemedia-transformed_pnfdex.jpg") center / cover
     no-repeat;
   z-index: -1;
 }
