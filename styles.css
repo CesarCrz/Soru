@@ -553,14 +553,14 @@ body {
   box-shadow: 0 15px 35px rgba(29, 18, 18, 0.1);
 }
 
-.about-image img {
+.about-image video {
   width: 100%;
   height: 400px;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.about-image:hover img {
+.about-image:hover video {
   transform: scale(1.05);
 }
 
