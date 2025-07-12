@@ -39,7 +39,12 @@
     </style>
 </head>
 <body>
-
+    
+    <script>
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            window.location.href = "./menu.pdf";
+        }
+    </script>
     <iframe src="./menu.pdf" title="Menú Soru Sushi">
         Este navegador no soporta la visualización de PDFs incrustados.
         Puedes <a href="./menu.pdf">visualizar el menú aquí</a>.
